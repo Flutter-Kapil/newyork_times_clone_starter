@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';
 
 void main() => runApp(MaterialApp(
@@ -56,14 +57,13 @@ class _NewsListPageState extends State<NewsListPage> {
 }
 
 class HomeScreenNewsCardList extends StatelessWidget {
-  const HomeScreenNewsCardList({
-    Key key,
-    @required this.fetchedNews,
-    @required this.newsMap,
-  }) : super(key: key);
-
   final bool fetchedNews;
   final Map newsMap;
+
+  HomeScreenNewsCardList({
+    this.fetchedNews,
+    this.newsMap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +75,21 @@ class HomeScreenNewsCardList extends StatelessWidget {
             dense: true,
             onTap: () {
               print('tapped');
+              Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => DetailedNewsPage(
+                            descriptionFromHomePage: newsMap['articles'][index]
+                                ['description'],
+                            titleFromHomePage: newsMap['articles'][index]
+                                ['title'],
+                            urlFromHomePage: newsMap['articles'][index]
+                                ['urlToImage'],
+                            sourceFromHomePage: newsMap['articles'][index]
+                                ['source']['name'],
+                            timeFromHomePage: DateTime.parse(
+                                newsMap['articles'][index]['publishedAt']),
+                          )));
             },
             contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             title: Container(
