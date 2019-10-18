@@ -42,32 +42,14 @@ class _NewsListPageState extends State<NewsListPage> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: FlatButton(
-                child: Text('getNews'),
-                onPressed: () {
-                  print(getNewsJsonLink.url);
-                  setState(() {});
-                },
+        child: fetchedNews
+            ? HomeScreenNewsCardList(fetchedNews: fetchedNews, newsMap: newsMap)
+            : Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 3.0,
+                  backgroundColor: Colors.red,
+                ),
               ),
-            ),
-            Expanded(
-              flex: 8,
-              child: fetchedNews
-                  ? HomeScreenNewsCardList(
-                      fetchedNews: fetchedNews, newsMap: newsMap)
-                  : Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3.0,
-                        backgroundColor: Colors.red,
-                      ),
-                    ),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -86,75 +68,118 @@ class HomeScreenNewsCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.only(top: 10),
         itemCount: newsMap['articles'].length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(newsMap['articles'][index]['title'],
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        width: 250,
-                        margin: EdgeInsets.all(2.0),
-                        child: newsMap['articles'][index]['description'] != null
-                            ? Text(newsMap['articles'][index]['description'])
-                            : Text('No description provided'),
+            dense: true,
+            onTap: () {
+              print('tapped');
+            },
+            contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+            title: Container(
+              height: 200,
+              width: double.infinity,
+              child: Column(
+                children: <Widget>[
+                  //title
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      newsMap['articles'][index]['title'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        width: 150,
-                        margin: EdgeInsets.all(12.0),
-                        child: newsMap['articles'][index]['urlToImage'] == null
-                            ? Image.asset('assets/defaultimage.png')
-                            : Image.network(
-                                newsMap['articles'][index]['urlToImage']),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                            newsMap['articles'][index]['source']['name'],
-                            style: TextStyle(color: Colors.grey)),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        margin: EdgeInsets.all(2.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Icon(Icons.share),
-                            Icon(Icons.bookmark_border)
-                          ],
+                  ),
+//                  description and image
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          width: 250,
+                          margin: EdgeInsets.all(2.0),
+                          child: Center(
+                            child: newsMap['articles'][index]['description'] !=
+                                    null
+                                ? Text(
+                                    newsMap['articles'][index]['description'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 5,
+                                  )
+                                : Text('No description provided'),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  color: Colors.black,
-                  height: 2.0,
-                ),
-              ],
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          width: 150,
+                          margin: EdgeInsets.all(12.0),
+                          child:
+                              newsMap['articles'][index]['urlToImage'] == null
+                                  ? Image.asset('assets/defaultimage.png')
+                                  : Image.network(
+                                      newsMap['articles'][index]['urlToImage']),
+                        ),
+                      ),
+                    ],
+                  ),
+//                  source , time,  bookmark and share icon
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            children: <Widget>[
+                              Text(newsMap['articles'][index]['source']['name'],
+                                  style: TextStyle(color: Colors.grey)),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Text(
+                                    '${DateTime.now().difference(DateTime.parse(newsMap['articles'][index]['publishedAt'])).inHours} hour(s) ago',
+                                    style: TextStyle(color: Colors.grey)),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          margin: EdgeInsets.all(2.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Icon(
+                                Icons.share,
+                                color: Colors.blueGrey,
+                              ),
+                              Icon(
+                                Icons.bookmark_border,
+                                color: Colors.blueGrey,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 8),
+                    color: Colors.black12,
+                    height: 2.0,
+                  ),
+                ],
+              ),
             ),
           );
         });
