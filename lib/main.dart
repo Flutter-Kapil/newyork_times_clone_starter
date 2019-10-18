@@ -49,6 +49,7 @@ class _NewsListPageState extends State<NewsListPage> {
               child: FlatButton(
                 child: Text('getNews'),
                 onPressed: () {
+                  print(getNewsJsonLink.url);
                   setState(() {});
                 },
               ),
@@ -104,9 +105,9 @@ class HomeScreenNewsCardList extends StatelessWidget {
                       child: Container(
                         width: 250,
                         margin: EdgeInsets.all(2.0),
-                        child: Text(
-                          newsMap['articles'][index]['description'],
-                        ),
+                        child: newsMap['articles'][index]['description'] != null
+                            ? Text(newsMap['articles'][index]['description'])
+                            : Text('No description provided'),
                       ),
                     ),
                     Expanded(
