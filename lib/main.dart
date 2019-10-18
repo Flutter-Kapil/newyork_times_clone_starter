@@ -47,7 +47,7 @@ class _NewsListPageState extends State<NewsListPage> {
             Expanded(
               flex: 1,
               child: FlatButton(
-                child: Text('getNewsAPI'),
+                child: Text('getNews'),
                 onPressed: () {
                   setState(() {});
                 },
@@ -114,8 +114,10 @@ class HomeScreenNewsCardList extends StatelessWidget {
                       child: Container(
                         width: 150,
                         margin: EdgeInsets.all(12.0),
-                        child: Image.network(
-                            newsMap['articles'][index]['urlToImage']),
+                        child: newsMap['articles'][index]['urlToImage'] == null
+                            ? Image.asset('assets/defaultimage.png')
+                            : Image.network(
+                                newsMap['articles'][index]['urlToImage']),
                       ),
                     ),
                   ],
