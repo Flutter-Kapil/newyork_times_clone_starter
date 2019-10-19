@@ -23,7 +23,6 @@ class _NewsListPageState extends State<NewsListPage> {
   }
 
   void fetchingNewsData() async {
-    fetchedNews = false;
     print('will try to fetch news');
     newsMap = await getNewsJsonLink.fetchNewsMapFromURL();
     print('news fetched and itemCOunt should be ${newsMap['articles'].length}');
@@ -44,14 +43,23 @@ class _NewsListPageState extends State<NewsListPage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: fetchedNews
-            ? HomeScreenNewsCardList(fetchedNews: fetchedNews, newsMap: newsMap)
-            : Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 3.0,
-                  backgroundColor: Colors.red,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            fetchingNewsData();
+            print('news refreshed');
+
+            setState(() {});
+          },
+          child: fetchedNews
+              ? HomeScreenNewsCardList(
+                  fetchedNews: fetchedNews, newsMap: newsMap)
+              : Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3.0,
+                    backgroundColor: Colors.red,
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }
