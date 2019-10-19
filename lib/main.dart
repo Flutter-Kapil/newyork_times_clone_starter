@@ -104,9 +104,9 @@ class HomeScreenNewsCardList extends StatelessWidget {
                     child: Text(
                       newsMap['articles'][index]['title'],
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'linlibertine_r'),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       strutStyle: StrutStyle(height: 1),
@@ -131,6 +131,8 @@ class HomeScreenNewsCardList extends StatelessWidget {
                                       newsMap['articles'][index]['description'],
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 5,
+                                      style: TextStyle(
+                                          fontFamily: 'linlibertine_dr'),
                                       strutStyle: StrutStyle(height: 1),
                                     )
                                   : Text('No description provided'),

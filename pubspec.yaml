@@ -31,3 +31,6 @@ flutter:
     - family: linlibertine_dr
       fonts:
         - asset: fonts/linlibertine_dr.ttf
+    - family: linlibertine_r
+      fonts:
+        - asset: fonts/linlibertine_r.ttf
