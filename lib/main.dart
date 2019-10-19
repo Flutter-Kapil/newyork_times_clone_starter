@@ -94,13 +94,13 @@ class HomeScreenNewsCardList extends StatelessWidget {
             },
             contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             title: Container(
-              height: 200,
+//              height: 200,
               width: double.infinity,
               child: Column(
                 children: <Widget>[
                   //title
-                  Container(
-                    alignment: Alignment.topLeft,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
                       newsMap['articles'][index]['title'],
                       style: TextStyle(
@@ -109,42 +109,48 @@ class HomeScreenNewsCardList extends StatelessWidget {
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
+                      strutStyle: StrutStyle(height: 1),
                     ),
                   ),
 //                  description and image
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          width: 250,
-                          margin: EdgeInsets.all(2.0),
-                          child: Center(
-                            child: newsMap['articles'][index]['description'] !=
-                                    null
-                                ? Text(
-                                    newsMap['articles'][index]['description'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 5,
-                                  )
-                                : Text('No description provided'),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            width: 250,
+                            margin: EdgeInsets.all(2.0),
+                            child: Center(
+                              child: newsMap['articles'][index]
+                                          ['description'] !=
+                                      null
+                                  ? Text(
+                                      newsMap['articles'][index]['description'],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 5,
+                                      strutStyle: StrutStyle(height: 1),
+                                    )
+                                  : Text('No description provided'),
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          width: 150,
-                          margin: EdgeInsets.all(12.0),
-                          child:
-                              newsMap['articles'][index]['urlToImage'] == null
-                                  ? Image.asset('assets/defaultimage.png')
-                                  : Image.network(
-                                      newsMap['articles'][index]['urlToImage']),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            width: 150,
+                            margin: EdgeInsets.all(12.0),
+                            child: newsMap['articles'][index]['urlToImage'] ==
+                                    null
+                                ? Image.asset('assets/defaultimage.png')
+                                : Image.network(
+                                    newsMap['articles'][index]['urlToImage']),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 //                  source , time,  bookmark and share icon
                   Row(

@@ -54,21 +54,23 @@ class DetailedNewsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            //title
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text(titleFromHomePage,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
-                      fontStyle: FontStyle.italic)),
+                      fontSize: 28,
+                      fontFamily: 'linlibertine_abl')),
             ),
+//            description
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: descriptionFromHomePage != null
-                  ? Text(
-                      descriptionFromHomePage,
-                    )
+                  ? Text(descriptionFromHomePage,
+                      style: TextStyle(
+                          fontFamily: 'linlibertine_dr', fontSize: 16))
                   : Text(
                       'No description provided',
                       textAlign: TextAlign.center,
@@ -84,17 +86,23 @@ class DetailedNewsPage extends StatelessWidget {
                     )
                   : Image.network(urlFromHomePage),
             ),
+//            image caption
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                style: TextStyle(
+                    color: Colors.grey, fontFamily: 'linlibertine_dr'),
+              ),
             ),
+//            source name
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text("By $sourceFromHomePage",
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
             ),
+//            date
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text(
