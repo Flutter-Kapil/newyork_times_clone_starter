@@ -1,4 +1,4 @@
-import 'main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailedNewsPage extends StatelessWidget {
@@ -19,49 +19,89 @@ class DetailedNewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('India'),
+        backgroundColor: Colors.white,
+        title: Text(
+          'India',
+          style: TextStyle(color: Colors.grey, fontSize: 24),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.grey,
+            color: Colors.blueGrey,
           ),
         ),
-        actions: <Widget>[Icon(Icons.more_vert), Icon(Icons.share)],
+        actions: <Widget>[
+          Icon(
+            Icons.share,
+            color: Colors.blueGrey,
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Icon(
+            Icons.more_vert,
+            color: Colors.blueGrey,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(titleFromHomePage,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22)),
-            Center(
-              child: descriptionFromHomePage != null
-                  ? Text(descriptionFromHomePage)
-                  : Text('No description provided'),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: Text(titleFromHomePage,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontStyle: FontStyle.italic)),
             ),
-            urlFromHomePage == null
-                ? Image.asset(
-                    'assets/defaultimage.png',
-                    fit: BoxFit.fitWidth,
-                  )
-                : Image.network(urlFromHomePage),
-            Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
-            Text("By $sourceFromHomePage",
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold)),
-            Text(
-              "${timeFromHomePage.day}-${timeFromHomePage.month}-${timeFromHomePage.year}",
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: descriptionFromHomePage != null
+                  ? Text(
+                      descriptionFromHomePage,
+                    )
+                  : Text(
+                      'No description provided',
+                      textAlign: TextAlign.center,
+                    ),
+            ),
+//            image
+            Padding(
+              padding: const EdgeInsets.only(top: 14),
+              child: urlFromHomePage == null
+                  ? Image.asset(
+                      'assets/defaultimage.png',
+                      fit: BoxFit.fitWidth,
+                    )
+                  : Image.network(urlFromHomePage),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: Text("By $sourceFromHomePage",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: Text(
+                "${timeFromHomePage.day}-${timeFromHomePage.month}-${timeFromHomePage.year}",
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),

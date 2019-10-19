@@ -41,6 +41,7 @@ class _NewsListPageState extends State<NewsListPage> {
           style: TextStyle(
               fontSize: 32, color: Colors.black, fontFamily: 'OldLondon'),
         ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: fetchedNews
