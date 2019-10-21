@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';
@@ -124,39 +125,37 @@ class HomeScreenNewsCardList extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Expanded(
                           flex: 3,
                           child: Container(
-                            width: 250,
+//                            width: 250,
                             margin: EdgeInsets.all(2.0),
-                            child: Center(
-                              child: newsMap['articles'][index]
-                                          ['description'] !=
-                                      null
-                                  ? Text(
-                                      newsMap['articles'][index]['description'],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 5,
-                                      style: TextStyle(
-                                          fontFamily: 'linlibertine_dr'),
-                                      strutStyle: StrutStyle(height: 1),
-                                    )
-                                  : Text('No description provided'),
-                            ),
+                            child: newsMap['articles'][index]['description'] !=
+                                    null
+                                ? Text(
+                                    newsMap['articles'][index]['description'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 5,
+                                    style: TextStyle(
+                                        fontFamily: 'linlibertine_dr'),
+                                    strutStyle: StrutStyle(height: 1),
+                                  )
+                                : Text('No description provided'),
                           ),
                         ),
                         Expanded(
                           flex: 2,
                           child: Container(
-                            width: 150,
-                            margin: EdgeInsets.all(12.0),
-                            child: newsMap['articles'][index]['urlToImage'] ==
-                                    null
-                                ? Image.asset('assets/defaultimage.png')
-                                : Image.network(
-                                    newsMap['articles'][index]['urlToImage']),
+//                            width: 150,
+                            margin: EdgeInsets.all(2.0),
+                            child: Image.network(
+                                  newsMap['articles'][index]['urlToImage'],
+                                  fit: BoxFit.fill,
+                                ) ??
+                                Image.asset('assets/defaultimage.png'),
                           ),
                         ),
                       ],
