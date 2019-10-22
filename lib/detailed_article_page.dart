@@ -2,19 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailedNewsPage extends StatelessWidget {
-  final String titleFromHomePage;
-  final String descriptionFromHomePage;
-  final String urlFromHomePage;
-  final DateTime timeFromHomePage;
-  final String sourceFromHomePage;
+  final Map articleMap;
 
-  DetailedNewsPage({
-    this.descriptionFromHomePage,
-    this.timeFromHomePage,
-    this.titleFromHomePage,
-    this.urlFromHomePage,
-    this.sourceFromHomePage,
-  });
+  DetailedNewsPage(this.articleMap);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +48,7 @@ class DetailedNewsPage extends StatelessWidget {
             //title
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: Text(titleFromHomePage,
+              child: Text(articleMap['title'],
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Colors.black,
@@ -68,8 +58,8 @@ class DetailedNewsPage extends StatelessWidget {
 //            description
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: descriptionFromHomePage != null
-                  ? Text(descriptionFromHomePage,
+              child: articleMap['description'] != null
+                  ? Text(articleMap['description'],
                       style: TextStyle(
                           fontFamily: 'linlibertine_dr', fontSize: 16))
                   : Text(
@@ -81,13 +71,13 @@ class DetailedNewsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 14),
               child: Hero(
-                tag: titleFromHomePage,
-                child: urlFromHomePage == null
+                tag: articleMap['title'],
+                child: articleMap['urlToImage'] == null
                     ? Image.asset(
                         'assets/defaultimage.png',
                         fit: BoxFit.fitWidth,
                       )
-                    : Image.network(urlFromHomePage),
+                    : Image.network(articleMap['urlToImage']),
               ),
             ),
 //            image caption
@@ -102,7 +92,7 @@ class DetailedNewsPage extends StatelessWidget {
 //            source name
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: Text("By $sourceFromHomePage",
+              child: Text("By ${articleMap['source']['name']}",
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
             ),
@@ -110,7 +100,7 @@ class DetailedNewsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text(
-                "${timeFromHomePage.day}-${timeFromHomePage.month}-${timeFromHomePage.year}",
+                "${articleMap['publishedAt'].day}-${articleMap['publishedAt'].month}-${articleMap['publishedAt'].year}",
                 style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),

@@ -88,18 +88,8 @@ class HomeScreenNewsCardList extends StatelessWidget {
               Navigator.push(
                   (context),
                   MaterialPageRoute(
-                      builder: (context) => DetailedNewsPage(
-                            descriptionFromHomePage: newsMap['articles'][index]
-                                ['description'],
-                            titleFromHomePage: newsMap['articles'][index]
-                                ['title'],
-                            urlFromHomePage: newsMap['articles'][index]
-                                ['urlToImage'],
-                            sourceFromHomePage: newsMap['articles'][index]
-                                ['source']['name'],
-                            timeFromHomePage: DateTime.parse(
-                                newsMap['articles'][index]['publishedAt']),
-                          )));
+                      builder: (context) =>
+                          DetailedNewsPage(newsMap['articles'][index])));
             },
             contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             title: Container(
