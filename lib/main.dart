@@ -151,11 +151,14 @@ class HomeScreenNewsCardList extends StatelessWidget {
                           child: Container(
 //                            width: 150,
                             margin: EdgeInsets.all(2.0),
-                            child: Image.network(
-                                  newsMap['articles'][index]['urlToImage'],
-                                  fit: BoxFit.fill,
-                                ) ??
-                                Image.asset('assets/defaultimage.png'),
+                            child: Hero(
+                              tag: newsMap['articles'][index]['title'],
+                              child: Image.network(
+                                    newsMap['articles'][index]['urlToImage'],
+                                    fit: BoxFit.fill,
+                                  ) ??
+                                  Image.asset('assets/defaultimage.png'),
+                            ),
                           ),
                         ),
                       ],

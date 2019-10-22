@@ -8,12 +8,13 @@ class DetailedNewsPage extends StatelessWidget {
   final DateTime timeFromHomePage;
   final String sourceFromHomePage;
 
-  DetailedNewsPage(
-      {this.descriptionFromHomePage,
-      this.timeFromHomePage,
-      this.titleFromHomePage,
-      this.urlFromHomePage,
-      this.sourceFromHomePage});
+  DetailedNewsPage({
+    this.descriptionFromHomePage,
+    this.timeFromHomePage,
+    this.titleFromHomePage,
+    this.urlFromHomePage,
+    this.sourceFromHomePage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +80,15 @@ class DetailedNewsPage extends StatelessWidget {
 //            image
             Padding(
               padding: const EdgeInsets.only(top: 14),
-              child: urlFromHomePage == null
-                  ? Image.asset(
-                      'assets/defaultimage.png',
-                      fit: BoxFit.fitWidth,
-                    )
-                  : Image.network(urlFromHomePage),
+              child: Hero(
+                tag: titleFromHomePage,
+                child: urlFromHomePage == null
+                    ? Image.asset(
+                        'assets/defaultimage.png',
+                        fit: BoxFit.fitWidth,
+                      )
+                    : Image.network(urlFromHomePage),
+              ),
             ),
 //            image caption
             Padding(
