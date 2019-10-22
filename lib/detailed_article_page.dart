@@ -106,7 +106,7 @@ class DetailedNewsPage extends StatelessWidget {
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
             ),
-            Text(articleMap[''])
+            Text(articleMap['content'])
           ],
         ),
       ),
