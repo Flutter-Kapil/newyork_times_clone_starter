@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';

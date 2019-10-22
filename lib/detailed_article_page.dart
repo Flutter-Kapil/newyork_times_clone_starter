@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailedNewsPage extends StatelessWidget {
@@ -106,7 +105,18 @@ class DetailedNewsPage extends StatelessWidget {
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
             ),
-            Text(articleMap['content'])
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
+              child: Text(articleMap['content']
+                  .substring(0, articleMap['content'].length - 13)),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 4, 14, 8),
+              child: InkWell(
+                child: Text('Read Full News'),
+                onTap: () {},
+              ),
+            ),
           ],
         ),
       ),
