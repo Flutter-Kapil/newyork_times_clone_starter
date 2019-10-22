@@ -8,6 +8,7 @@ class DetailedNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime articleTime = DateTime.parse(articleMap['publishedAt']);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -100,11 +101,12 @@ class DetailedNewsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
               child: Text(
-                "${articleMap['publishedAt'].day}-${articleMap['publishedAt'].month}-${articleMap['publishedAt'].year}",
+                "${articleTime.day}-${articleTime.month}-${articleTime.year}",
                 style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
-            )
+            ),
+            Text(articleMap[''])
           ],
         ),
       ),
