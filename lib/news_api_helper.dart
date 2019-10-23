@@ -14,7 +14,7 @@ class NetworkHelper {
 
   Future<Map> fetchNewsMapFromURL() async {
     print('reached here inside fewtch');
-    print('url here is $url');
+    print('url here is ${this.url}');
     Response response = await get(url);
     if (response.statusCode == 200) {
       print("response 200");

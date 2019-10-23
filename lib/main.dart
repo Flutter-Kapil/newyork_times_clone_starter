@@ -43,22 +43,94 @@ class _NewsListPageState extends State<NewsListPage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            fetchingNewsData();
-            print('news refreshed');
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                flex: 1,
+                child: ListView(
+                  // This next line does the trick.
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      width: 160.0,
+                      color: Colors.red,
+                      child: GestureDetector(
+                        onTap: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'au');
+                          fetchingNewsData();
+                        },
+                        child: Text('India'),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: GestureDetector(
+                        child: Text('Australia'),
+                        onTap: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'au');
+                          fetchingNewsData();
+                        },
+                      ),
+                      width: 160.0,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.green,
+                      child: GestureDetector(
+                        onTap: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'us');
+                          fetchingNewsData();
+                        },
+                        child: Text('USA'),
+                      ),
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.yellow,
+                      child: GestureDetector(
+                        child: Text('New Zeland'),
+                        onTap: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'nz');
+                          fetchingNewsData();
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.orange,
+                      child: GestureDetector(
+                        child: Text('Indonesia'),
+                        onTap: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'id');
+                          fetchingNewsData();
+                        },
+                      ),
+                    ),
+                  ],
+                )),
+            Expanded(
+              flex: 15,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  fetchingNewsData();
+                  print('news refreshed');
 
-            setState(() {});
-          },
-          child: fetchedNews
-              ? HomeScreenNewsCardList(
-                  fetchedNews: fetchedNews, newsMap: newsMap)
-              : Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3.0,
-                    backgroundColor: Colors.red,
-                  ),
-                ),
+                  setState(() {});
+                },
+                child: fetchedNews
+                    ? HomeScreenNewsCardList(
+                        fetchedNews: fetchedNews, newsMap: newsMap)
+                    : Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3.0,
+                          backgroundColor: Colors.red,
+                        ),
+                      ),
+              ),
+            ),
+          ],
         ),
       ),
     );
