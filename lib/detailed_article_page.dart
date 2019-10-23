@@ -107,8 +107,10 @@ class DetailedNewsPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: Text(articleMap['content']
-                  .substring(0, articleMap['content'].length - 13)),
+              child: articleMap['content'] != null
+                  ? Text(articleMap['content']
+                      .substring(0, articleMap['content'].length - 13))
+                  : Text(''),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(14, 4, 14, 8),

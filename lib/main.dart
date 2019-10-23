@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';
 
@@ -48,19 +49,27 @@ class _NewsListPageState extends State<NewsListPage> {
             Expanded(
                 flex: 1,
                 child: ListView(
+                  itemExtent: 120,
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     FlatButton(
                         padding: EdgeInsets.all(0),
-                        child: Text('India'),
+                        child: Text(
+                          'India',
+                          style: TextStyle(color: Colors.black38, fontSize: 22),
+                        ),
                         onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'in');
                           fetchingNewsData();
                           setState(() {});
                         }),
                     FlatButton(
+                        clipBehavior: Clip.hardEdge,
                         padding: EdgeInsets.all(0),
-                        child: Text('Australia'),
+                        child: Text(
+                          'Australia',
+                          style: TextStyle(color: Colors.black38, fontSize: 22),
+                        ),
                         onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'au');
                           fetchingNewsData();
@@ -68,7 +77,10 @@ class _NewsListPageState extends State<NewsListPage> {
                         }),
                     FlatButton(
                         padding: EdgeInsets.all(0),
-                        child: Text('USA'),
+                        child: Text(
+                          'USA',
+                          style: TextStyle(color: Colors.black38, fontSize: 22),
+                        ),
                         onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'us');
                           fetchingNewsData();
@@ -76,7 +88,9 @@ class _NewsListPageState extends State<NewsListPage> {
                         }),
                     FlatButton(
                         padding: EdgeInsets.all(0),
-                        child: Text('New Zeland'),
+                        child: Text('New Zeland',
+                            style:
+                                TextStyle(color: Colors.black38, fontSize: 22)),
                         onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'nz');
                           fetchingNewsData();
@@ -84,7 +98,9 @@ class _NewsListPageState extends State<NewsListPage> {
                         }),
                     FlatButton(
                         padding: EdgeInsets.all(0),
-                        child: Text('Indonesia'),
+                        child: Text('Indonesia',
+                            style:
+                                TextStyle(color: Colors.black38, fontSize: 22)),
                         onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'id');
                           fetchingNewsData();
@@ -196,11 +212,13 @@ class HomeScreenNewsCardList extends StatelessWidget {
                             margin: EdgeInsets.all(2.0),
                             child: Hero(
                               tag: newsMap['articles'][index]['title'],
-                              child: Image.network(
-                                    newsMap['articles'][index]['urlToImage'],
-                                    fit: BoxFit.fill,
-                                  ) ??
-                                  Image.asset('assets/defaultimage.png'),
+                              child: newsMap['articles'][index]['urlToImage'] !=
+                                      null
+                                  ? Image.network(
+                                      newsMap['articles'][index]['urlToImage'],
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.asset('assets/defaultimage.png'),
                             ),
                           ),
                         ),
