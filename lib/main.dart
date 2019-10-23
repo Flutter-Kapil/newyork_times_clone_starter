@@ -48,66 +48,48 @@ class _NewsListPageState extends State<NewsListPage> {
             Expanded(
                 flex: 1,
                 child: ListView(
-                  // This next line does the trick.
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      width: 160.0,
-                      color: Colors.red,
-                      child: GestureDetector(
-                        onTap: () {
-                          getNewsJsonLink = NetworkHelper(countryName: 'au');
-                          fetchingNewsData();
-                        },
+                    FlatButton(
+                        padding: EdgeInsets.all(0),
                         child: Text('India'),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
+                        onPressed: () {
+                          getNewsJsonLink = NetworkHelper(countryName: 'in');
+                          fetchingNewsData();
+                          setState(() {});
+                        }),
+                    FlatButton(
+                        padding: EdgeInsets.all(0),
                         child: Text('Australia'),
-                        onTap: () {
+                        onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'au');
                           fetchingNewsData();
-                        },
-                      ),
-                      width: 160.0,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.green,
-                      child: GestureDetector(
-                        onTap: () {
+                          setState(() {});
+                        }),
+                    FlatButton(
+                        padding: EdgeInsets.all(0),
+                        child: Text('USA'),
+                        onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'us');
                           fetchingNewsData();
-                        },
-                        child: Text('USA'),
-                      ),
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.yellow,
-                      child: GestureDetector(
+                          setState(() {});
+                        }),
+                    FlatButton(
+                        padding: EdgeInsets.all(0),
                         child: Text('New Zeland'),
-                        onTap: () {
+                        onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'nz');
                           fetchingNewsData();
-                        },
-                      ),
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.orange,
-                      child: GestureDetector(
+                          setState(() {});
+                        }),
+                    FlatButton(
+                        padding: EdgeInsets.all(0),
                         child: Text('Indonesia'),
-                        onTap: () {
+                        onPressed: () {
                           getNewsJsonLink = NetworkHelper(countryName: 'id');
                           fetchingNewsData();
-                        },
-                      ),
-                    ),
+                          setState(() {});
+                        }),
                   ],
                 )),
             Expanded(
