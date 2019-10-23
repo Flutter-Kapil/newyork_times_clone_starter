@@ -59,6 +59,7 @@ class _NewsListPageState extends State<NewsListPage> {
                           style: TextStyle(color: Colors.black38, fontSize: 22),
                         ),
                         onPressed: () {
+                          fetchedNews = false;
                           getNewsJsonLink = NetworkHelper(countryName: 'in');
                           fetchingNewsData();
                           setState(() {});
@@ -71,6 +72,7 @@ class _NewsListPageState extends State<NewsListPage> {
                           style: TextStyle(color: Colors.black38, fontSize: 22),
                         ),
                         onPressed: () {
+                          fetchedNews = false;
                           getNewsJsonLink = NetworkHelper(countryName: 'au');
                           fetchingNewsData();
                           setState(() {});
@@ -82,6 +84,7 @@ class _NewsListPageState extends State<NewsListPage> {
                           style: TextStyle(color: Colors.black38, fontSize: 22),
                         ),
                         onPressed: () {
+                          fetchedNews = false;
                           getNewsJsonLink = NetworkHelper(countryName: 'us');
                           fetchingNewsData();
                           setState(() {});
@@ -92,6 +95,7 @@ class _NewsListPageState extends State<NewsListPage> {
                             style:
                                 TextStyle(color: Colors.black38, fontSize: 22)),
                         onPressed: () {
+                          fetchedNews =false;
                           getNewsJsonLink = NetworkHelper(countryName: 'nz');
                           fetchingNewsData();
                           setState(() {});
@@ -102,6 +106,7 @@ class _NewsListPageState extends State<NewsListPage> {
                             style:
                                 TextStyle(color: Colors.black38, fontSize: 22)),
                         onPressed: () {
+                          fetchedNews =false;
                           getNewsJsonLink = NetworkHelper(countryName: 'id');
                           fetchingNewsData();
                           setState(() {});
