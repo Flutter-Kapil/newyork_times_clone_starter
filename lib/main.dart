@@ -33,107 +33,171 @@ class _NewsListPageState extends State<NewsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          'Your Times',
-          style: TextStyle(
-              fontSize: 32, color: Colors.black, fontFamily: 'OldLondon'),
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: ListView(
-                  itemExtent: 120,
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    FlatButton(
-                        padding: EdgeInsets.all(0),
-                        child: Text(
-                          'India',
-                          style: TextStyle(color: Colors.black38, fontSize: 22),
-                        ),
-                        onPressed: () {
-                          fetchedNews = false;
-                          getNewsJsonLink = NetworkHelper(countryName: 'in');
-                          fetchingNewsData();
-                          setState(() {});
-                        }),
-                    FlatButton(
-                        clipBehavior: Clip.hardEdge,
-                        padding: EdgeInsets.all(0),
-                        child: Text(
-                          'Australia',
-                          style: TextStyle(color: Colors.black38, fontSize: 22),
-                        ),
-                        onPressed: () {
-                          fetchedNews = false;
-                          getNewsJsonLink = NetworkHelper(countryName: 'au');
-                          fetchingNewsData();
-                          setState(() {});
-                        }),
-                    FlatButton(
-                        padding: EdgeInsets.all(0),
-                        child: Text(
-                          'USA',
-                          style: TextStyle(color: Colors.black38, fontSize: 22),
-                        ),
-                        onPressed: () {
-                          fetchedNews = false;
-                          getNewsJsonLink = NetworkHelper(countryName: 'us');
-                          fetchingNewsData();
-                          setState(() {});
-                        }),
-                    FlatButton(
-                        padding: EdgeInsets.all(0),
-                        child: Text('New Zeland',
-                            style:
-                                TextStyle(color: Colors.black38, fontSize: 22)),
-                        onPressed: () {
-                          fetchedNews = false;
-                          getNewsJsonLink = NetworkHelper(countryName: 'nz');
-                          fetchingNewsData();
-                          setState(() {});
-                        }),
-                    FlatButton(
-                        padding: EdgeInsets.all(0),
-                        child: Text('Indonesia',
-                            style:
-                                TextStyle(color: Colors.black38, fontSize: 22)),
-                        onPressed: () {
-                          fetchedNews = false;
-                          getNewsJsonLink = NetworkHelper(countryName: 'id');
-                          fetchingNewsData();
-                          setState(() {});
-                        }),
-                  ],
-                )),
-            Expanded(
-              flex: 15,
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  fetchingNewsData();
-                  print('news refreshed');
-
-                  setState(() {});
-                },
-                child: fetchedNews
-                    ? HomeScreenNewsCardList(
-                        fetchedNews: fetchedNews, newsMap: newsMap)
-                    : Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0,
-                          backgroundColor: Colors.red,
-                        ),
-                      ),
-              ),
-            ),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            Icon(
+              Icons.more_vert,
+              color: Colors.black38,
+            )
           ],
+          leading: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+          backgroundColor: Colors.white,
+          title: Text(
+            'Your Times',
+            style: TextStyle(
+                fontSize: 32, color: Colors.black, fontFamily: 'OldLondon'),
+          ),
+          centerTitle: true,
+          bottom: TabBar(
+            indicatorColor: Colors.black,
+            isScrollable: true,
+            onTap: (x) {
+              fetchedNews = false;
+              if (x == 0) getNewsJsonLink = NetworkHelper(countryName: 'in');
+              if (x == 1) getNewsJsonLink = NetworkHelper(countryName: 'au');
+              if (x == 2) getNewsJsonLink = NetworkHelper(countryName: 'us');
+              if (x == 3) getNewsJsonLink = NetworkHelper(countryName: 'nz');
+              if (x == 4) getNewsJsonLink = NetworkHelper(countryName: 'id');
+              fetchingNewsData();
+              setState(() {});
+            },
+            tabs: <Widget>[
+              Text(
+                "India",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38,
+                ),
+              ),
+              Text(
+                "Australia",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38,
+                ),
+              ),
+              Text(
+                "USA",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38,
+                ),
+              ),
+              Text(
+                "NewZealand",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38,
+                ),
+              ),
+              Text(
+                "Indonesia",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38,
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+//            Expanded(
+//                flex: 1,
+//                child: ListView(
+//                  itemExtent: 120,
+//                  scrollDirection: Axis.horizontal,
+//                  children: <Widget>[
+//                    FlatButton(
+//                        padding: EdgeInsets.all(0),
+//                        child: Text(
+//                          'India',
+//                          style: TextStyle(color: Colors.black38, fontSize: 22),
+//                        ),
+//                        onPressed: () {
+//                          fetchedNews = false;
+//                          getNewsJsonLink = NetworkHelper(countryName: 'in');
+//                          fetchingNewsData();
+//                          setState(() {});
+//                        }),
+//                    FlatButton(
+//                        clipBehavior: Clip.hardEdge,
+//                        padding: EdgeInsets.all(0),
+//                        child: Text(
+//                          'Australia',
+//                          style: TextStyle(color: Colors.black38, fontSize: 22),
+//                        ),
+//                        onPressed: () {
+//                          fetchedNews = false;
+//                          getNewsJsonLink = NetworkHelper(countryName: 'au');
+//                          fetchingNewsData();
+//                          setState(() {});
+//                        }),
+//                    FlatButton(
+//                        padding: EdgeInsets.all(0),
+//                        child: Text(
+//                          'USA',
+//                          style: TextStyle(color: Colors.black38, fontSize: 22),
+//                        ),
+//                        onPressed: () {
+//                          fetchedNews = false;
+//                          getNewsJsonLink = NetworkHelper(countryName: 'us');
+//                          fetchingNewsData();
+//                          setState(() {});
+//                        }),
+//                    FlatButton(
+//                        padding: EdgeInsets.all(0),
+//                        child: Text('New Zeland',
+//                            style:
+//                                TextStyle(color: Colors.black38, fontSize: 22)),
+//                        onPressed: () {
+//                          fetchedNews = false;
+//                          getNewsJsonLink = NetworkHelper(countryName: 'nz');
+//                          fetchingNewsData();
+//                          setState(() {});
+//                        }),
+//                    FlatButton(
+//                        padding: EdgeInsets.all(0),
+//                        child: Text('Indonesia',
+//                            style:
+//                                TextStyle(color: Colors.black38, fontSize: 22)),
+//                        onPressed: () {
+//                          fetchedNews = false;
+//                          getNewsJsonLink = NetworkHelper(countryName: 'id');
+//                          fetchingNewsData();
+//                          setState(() {});
+//                        }),
+//                  ],
+//                )),
+              Expanded(
+                flex: 15,
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    fetchingNewsData();
+                    print('news refreshed');
+
+                    setState(() {});
+                  },
+                  child: fetchedNews
+                      ? HomeScreenNewsCardList(
+                          fetchedNews: fetchedNews, newsMap: newsMap)
+                      : Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            backgroundColor: Colors.red,
+                          ),
+                        ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
