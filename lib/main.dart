@@ -55,7 +55,12 @@ class _NewsListPageState extends State<NewsListPage> {
           ),
           centerTitle: true,
           bottom: TabBar(
+            labelPadding: EdgeInsets.fromLTRB(7, 0, 7, 12),
+            unselectedLabelStyle:
+                TextStyle(color: Colors.black38, fontSize: 18),
             indicatorColor: Colors.black,
+            labelStyle: TextStyle(color: Colors.black, fontSize: 19),
+            labelColor: Colors.black,
             isScrollable: true,
             onTap: (x) {
               fetchedNews = false;
@@ -70,39 +75,11 @@ class _NewsListPageState extends State<NewsListPage> {
             tabs: <Widget>[
               Text(
                 "India",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black38,
-                ),
               ),
-              Text(
-                "Australia",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black38,
-                ),
-              ),
-              Text(
-                "USA",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black38,
-                ),
-              ),
-              Text(
-                "NewZealand",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black38,
-                ),
-              ),
-              Text(
-                "Indonesia",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black38,
-                ),
-              ),
+              Text("Australia"),
+              Text("USA"),
+              Text("NewZealand"),
+              Text("Indonesia"),
             ],
           ),
         ),
