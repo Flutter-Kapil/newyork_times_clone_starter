@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 class NetworkHelper {
   String url;
   String country;
-  String myNewsApiKey = "";
+  String myNewsApiKey = "YOUR API HERE";
 
   NetworkHelper({String generateUrl, String countryName}) {
     this.country = countryName;
@@ -24,6 +24,3 @@ class NetworkHelper {
     return newsDataMap;
   }
 }
-
-//top india headlines
-//https://newsapi.org/v2/top-headlines?country=in&apiKey=$myNewsApiKey

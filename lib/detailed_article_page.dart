@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'fullscreen_image.dart';
+
 class DetailedNewsPage extends StatelessWidget {
   final Map articleMap;
 
@@ -72,12 +74,23 @@ class DetailedNewsPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 14),
               child: Hero(
                 tag: articleMap['title'],
-                child: articleMap['urlToImage'] == null
-                    ? Image.asset(
-                        'assets/defaultimage.png',
-                        fit: BoxFit.fitWidth,
-                      )
-                    : Image.network(articleMap['urlToImage']),
+                child: GestureDetector(
+                  onTap: () {
+                    if (articleMap['urlToImage'] != null) {
+                      Navigator.push(
+                          (context),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  FullScreenImage(articleMap['urlToImage'])));
+                    }
+                  },
+                  child: articleMap['urlToImage'] == null
+                      ? Image.asset(
+                          'assets/defaultimage.png',
+                          fit: BoxFit.fitWidth,
+                        )
+                      : Image.network(articleMap['urlToImage']),
+                ),
               ),
             ),
 //            image caption
