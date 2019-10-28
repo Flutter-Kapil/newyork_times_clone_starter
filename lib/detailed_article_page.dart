@@ -45,7 +45,8 @@ class DetailedNewsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             //title
             Padding(
@@ -87,7 +88,8 @@ class DetailedNewsPage extends StatelessWidget {
                   child: articleMap['urlToImage'] == null
                       ? Image.asset(
                           'assets/defaultimage.png',
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center,
                         )
                       : Image.network(articleMap['urlToImage']),
                 ),
