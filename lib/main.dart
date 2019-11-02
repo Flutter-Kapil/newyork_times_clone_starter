@@ -12,6 +12,8 @@ class NewsListPage extends StatefulWidget {
   _NewsListPageState createState() => _NewsListPageState();
 }
 
+String countryName = 'India';
+
 class _NewsListPageState extends State<NewsListPage> {
   NetworkHelper getNewsJsonLink = NetworkHelper(countryName: 'in');
   Map newsMap;
@@ -64,11 +66,26 @@ class _NewsListPageState extends State<NewsListPage> {
             isScrollable: true,
             onTap: (x) {
               fetchedNews = false;
-              if (x == 0) getNewsJsonLink = NetworkHelper(countryName: 'in');
-              if (x == 1) getNewsJsonLink = NetworkHelper(countryName: 'au');
-              if (x == 2) getNewsJsonLink = NetworkHelper(countryName: 'us');
-              if (x == 3) getNewsJsonLink = NetworkHelper(countryName: 'nz');
-              if (x == 4) getNewsJsonLink = NetworkHelper(countryName: 'id');
+              if (x == 0) {
+                getNewsJsonLink = NetworkHelper(countryName: 'in');
+                countryName = 'India';
+              }
+              if (x == 1) {
+                getNewsJsonLink = NetworkHelper(countryName: 'au');
+                countryName = 'Australia';
+              }
+              if (x == 2) {
+                getNewsJsonLink = NetworkHelper(countryName: 'us');
+                countryName = 'USA';
+              }
+              if (x == 3) {
+                getNewsJsonLink = NetworkHelper(countryName: 'nz');
+                countryName = 'New Zeland';
+              }
+              if (x == 4) {
+                getNewsJsonLink = NetworkHelper(countryName: 'id');
+                countryName = 'Indonesia';
+              }
               fetchingNewsData();
               setState(() {});
             },
@@ -136,8 +153,8 @@ class HomeScreenNewsCardList extends StatelessWidget {
               Navigator.push(
                   (context),
                   MaterialPageRoute(
-                      builder: (context) =>
-                          DetailedNewsPage(newsMap['articles'][index])));
+                      builder: (context) => DetailedNewsPage(
+                          newsMap['articles'][index], countryName)));
             },
             contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             title: Container(
@@ -169,7 +186,6 @@ class HomeScreenNewsCardList extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: Container(
-//                            width: 250,
                             margin: EdgeInsets.all(2.0),
                             child: newsMap['articles'][index]['description'] !=
                                     null
@@ -187,7 +203,6 @@ class HomeScreenNewsCardList extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: Container(
-//                            width: 150,
                             margin: EdgeInsets.all(2.0),
                             child: Hero(
                               tag: newsMap['articles'][index]['title'],

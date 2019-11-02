@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'fullscreen_image.dart';
 
 class DetailedNewsPage extends StatelessWidget {
   final Map articleMap;
+  final String countryName;
 
-  DetailedNewsPage(this.articleMap);
+  DetailedNewsPage(this.articleMap, this.countryName);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class DetailedNewsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'India',
+          countryName,
           style: TextStyle(color: Colors.grey, fontSize: 24),
         ),
         leading: IconButton(
