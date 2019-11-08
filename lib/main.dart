@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';
+import 'package:share/share.dart';
 
 void main() => runApp(MaterialApp(
       home: NewsListPage(),
@@ -248,9 +249,12 @@ class HomeScreenNewsCardList extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Icon(
-                                Icons.share,
+                              IconButton(
+                                icon:Icon(Icons.share),
                                 color: Colors.blueGrey,
+                                onPressed: (){
+                                  Share.share(newsMap['articles'][index]['title']);
+                                },
                               ),
                               Icon(
                                 Icons.bookmark_border,
