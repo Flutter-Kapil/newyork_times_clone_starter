@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'fullscreen_image.dart';
 
 class DetailedNewsPage extends StatelessWidget {
@@ -27,9 +29,13 @@ class DetailedNewsPage extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          Icon(
-            Icons.share,
+          IconButton(
+            icon: Icon(Icons.share),
             color: Colors.blueGrey,
+            onPressed: () {
+              Share.share(
+                  '${articleMap['title']}\n ${articleMap['description']}\n ${articleMap['url']} ');
+            },
           ),
           SizedBox(
             width: 20,
@@ -130,8 +136,14 @@ class DetailedNewsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(14, 4, 14, 8),
               child: InkWell(
-                child: Text('Read Full News'),
-                onTap: () {},
+                splashColor: null,
+                child: Text(
+                  'Read Full News',
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onTap: () {
+                  launch(articleMap['url']);
+                },
               ),
             ),
           ],
