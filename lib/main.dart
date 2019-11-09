@@ -246,21 +246,13 @@ class HomeScreenNewsCardList extends StatelessWidget {
                         flex: 1,
                         child: Container(
                           margin: EdgeInsets.all(2.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              IconButton(
-                                icon:Icon(Icons.share),
-                                color: Colors.blueGrey,
-                                onPressed: (){
-                                  Share.share(newsMap['articles'][index]['title']);
-                                },
-                              ),
-                              Icon(
-                                Icons.bookmark_border,
-                                color: Colors.blueGrey,
-                              )
-                            ],
+                          child: IconButton(
+                            icon: Icon(Icons.share),
+                            color: Colors.blueGrey,
+                            onPressed: () {
+                              Share.share(
+                                  '${newsMap['articles'][index]['title']}\n ${newsMap['articles'][index]['description']}\n ${newsMap['articles'][index]['url']} ');
+                            },
                           ),
                         ),
                       ),
