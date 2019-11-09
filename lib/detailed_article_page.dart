@@ -65,17 +65,7 @@ class DetailedNewsPage extends StatelessWidget {
                       fontFamily: 'linlibertine_abl')),
             ),
 //            description
-            Padding(
-              padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: articleMap['description'] != null
-                  ? Text(articleMap['description'],
-                      style: TextStyle(
-                          fontFamily: 'linlibertine_dr', fontSize: 16))
-                  : Text(
-                      'No description provided',
-                      textAlign: TextAlign.center,
-                    ),
-            ),
+
 //            image
             Padding(
               padding: const EdgeInsets.only(top: 14),
@@ -104,11 +94,17 @@ class DetailedNewsPage extends StatelessWidget {
 //            image caption
             Padding(
               padding: EdgeInsets.fromLTRB(14, 14, 14, 0),
-              child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                style: TextStyle(
-                    color: Colors.grey, fontFamily: 'linlibertine_dr'),
-              ),
+              child: articleMap['description'] != null
+                  ? Text(articleMap['description'],
+                      style: TextStyle(
+                        fontFamily: 'linlibertine_dr',
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ))
+                  : Text(
+                      'No description provided',
+                      textAlign: TextAlign.center,
+                    ),
             ),
 //            source name
             Padding(
