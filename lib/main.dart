@@ -4,9 +4,11 @@ import 'package:newyork_times_clone_starter/detailed_article_page.dart';
 import 'news_api_helper.dart';
 import 'package:share/share.dart';
 
-void main() => runApp(MaterialApp(
-      home: NewsListPage(),
-    ));
+void main() {
+  runApp(
+    NewsListPage(),
+  );
+}
 
 class NewsListPage extends StatefulWidget {
   @override
@@ -19,6 +21,9 @@ class _NewsListPageState extends State<NewsListPage> {
   NetworkHelper getNewsJsonLink = NetworkHelper(countryName: 'in');
   Map newsMap;
   bool fetchedNews = false;
+  Brightness _theme = Brightness.light;
+  static Color _defaultAppbarColor = Colors.white;
+  Color appbarColor = _defaultAppbarColor;
 
   @override
   void initState() {
@@ -36,95 +41,113 @@ class _NewsListPageState extends State<NewsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            Icon(
-              Icons.more_vert,
-              color: Colors.black38,
-            )
-          ],
-          leading: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-          backgroundColor: Colors.white,
-          title: Text(
-            'Your Times',
-            style: TextStyle(
-                fontSize: 32, color: Colors.black, fontFamily: 'OldLondon'),
-          ),
-          centerTitle: true,
-          bottom: TabBar(
-            labelPadding: EdgeInsets.fromLTRB(7, 0, 7, 12),
-            unselectedLabelStyle:
-                TextStyle(color: Colors.black38, fontSize: 18),
-            indicatorColor: Colors.black,
-            labelStyle: TextStyle(color: Colors.black, fontSize: 19),
-            labelColor: Colors.black,
-            isScrollable: true,
-            onTap: (x) {
-              fetchedNews = false;
-              if (x == 0) {
-                getNewsJsonLink = NetworkHelper(countryName: 'in');
-                countryName = 'India';
-              }
-              if (x == 1) {
-                getNewsJsonLink = NetworkHelper(countryName: 'au');
-                countryName = 'Australia';
-              }
-              if (x == 2) {
-                getNewsJsonLink = NetworkHelper(countryName: 'us');
-                countryName = 'USA';
-              }
-              if (x == 3) {
-                getNewsJsonLink = NetworkHelper(countryName: 'nz');
-                countryName = 'New Zeland';
-              }
-              if (x == 4) {
-                getNewsJsonLink = NetworkHelper(countryName: 'id');
-                countryName = 'Indonesia';
-              }
-              fetchingNewsData();
-              setState(() {});
-            },
-            tabs: <Widget>[
-              Text(
-                "India",
-              ),
-              Text("Australia"),
-              Text("USA"),
-              Text("NewZealand"),
-              Text("Indonesia"),
-            ],
-          ),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 15,
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    fetchingNewsData();
-                    print('news refreshed');
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: appbarColor,
+        brightness: _theme,
+        textTheme: Typography().black,
+      ),
+      home: DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          appBar: AppBar(
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {
+                  //on pressing button switch between light/dark theme
+                  if (_theme == Brightness.light) {
+                    appbarColor = null;
+                    _theme = Brightness.dark;
+                  } else {
+                    appbarColor = _defaultAppbarColor;
+                    _theme = Brightness.light;
+                  }
 
-                    setState(() {});
-                  },
-                  child: fetchedNews
-                      ? HomeScreenNewsCardList(
-                          fetchedNews: fetchedNews, newsMap: newsMap)
-                      : Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 3.0,
-                            backgroundColor: Colors.red,
-                          ),
-                        ),
-                ),
+                  setState(() {});
+                },
+                icon: Icon(Icons.color_lens),
               ),
             ],
+            leading: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+//          backgroundColor: Colors.white,
+            title: Text(
+              'Your Times',
+              style: TextStyle(
+                  fontSize: 32, color: Colors.black, fontFamily: 'OldLondon'),
+            ),
+            centerTitle: true,
+            bottom: TabBar(
+              labelPadding: EdgeInsets.fromLTRB(7, 0, 7, 12),
+              unselectedLabelStyle:
+                  TextStyle(color: Colors.black38, fontSize: 18),
+              indicatorColor: Colors.black,
+              labelStyle: TextStyle(color: Colors.black, fontSize: 19),
+              labelColor: Colors.black,
+              isScrollable: true,
+              onTap: (x) {
+                fetchedNews = false;
+                if (x == 0) {
+                  getNewsJsonLink = NetworkHelper(countryName: 'in');
+                  countryName = 'India';
+                }
+                if (x == 1) {
+                  getNewsJsonLink = NetworkHelper(countryName: 'au');
+                  countryName = 'Australia';
+                }
+                if (x == 2) {
+                  getNewsJsonLink = NetworkHelper(countryName: 'us');
+                  countryName = 'USA';
+                }
+                if (x == 3) {
+                  getNewsJsonLink = NetworkHelper(countryName: 'nz');
+                  countryName = 'New Zeland';
+                }
+                if (x == 4) {
+                  getNewsJsonLink = NetworkHelper(countryName: 'id');
+                  countryName = 'Indonesia';
+                }
+                fetchingNewsData();
+                setState(() {});
+              },
+              tabs: <Widget>[
+                Text(
+                  "India",
+                ),
+                Text("Australia"),
+                Text("USA"),
+                Text("NewZealand"),
+                Text("Indonesia"),
+              ],
+            ),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 15,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      fetchingNewsData();
+                      print('news refreshed');
+
+                      setState(() {});
+                    },
+                    child: fetchedNews
+                        ? HomeScreenNewsCardList(
+                            fetchedNews: fetchedNews, newsMap: newsMap)
+                        : Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3.0,
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

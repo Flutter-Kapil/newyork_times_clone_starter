@@ -14,7 +14,7 @@ class DetailedNewsPage extends StatelessWidget {
     DateTime articleTime = DateTime.parse(articleMap['publishedAt']);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+//        backgroundColor: Colors.white,
         title: Text(
           countryName,
           style: TextStyle(color: Colors.grey, fontSize: 24),
