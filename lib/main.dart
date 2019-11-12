@@ -17,7 +17,8 @@ class NewsListPage extends StatefulWidget {
 
 String countryName = 'India';
 
-class _NewsListPageState extends State<NewsListPage> {
+class _NewsListPageState extends State<NewsListPage>
+    with AutomaticKeepAliveClientMixin {
   NetworkHelper getNewsJsonLink = NetworkHelper(countryName: 'in');
   Map newsMap;
   bool fetchedNews = false;
@@ -41,6 +42,7 @@ class _NewsListPageState extends State<NewsListPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -154,6 +156,10 @@ class _NewsListPageState extends State<NewsListPage> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class HomeScreenNewsCardList extends StatelessWidget {
