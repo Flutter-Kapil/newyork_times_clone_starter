@@ -42,6 +42,7 @@ class _NewsListPageState extends State<NewsListPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: appbarColor,
         brightness: _theme,
@@ -229,6 +230,8 @@ class HomeScreenNewsCardList extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.all(2.0),
                             child: Hero(
+                              createRectTween: (Rect r1, Rect r2) =>
+                                  RectTween(begin: r1, end: r2),
                               tag: newsMap['articles'][index]['title'],
                               child: newsMap['articles'][index]['urlToImage'] !=
                                       null
